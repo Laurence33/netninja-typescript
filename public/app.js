@@ -36,3 +36,31 @@ form.addEventListener("submit", (e) => {
     console.log(doc);
     listTemplate.render(doc, type.value, "start");
 });
+// Generics
+// Js
+const addUID = (obj) => {
+    let uid = Math.floor(Math.random() * 100);
+    return Object.assign(Object.assign({}, obj), { uid });
+};
+let doc1 = addUID({ name: "yoshi", age: 40 });
+console.log(doc1.uid);
+// Ts
+// <T> means that the function can support any type using T,
+// the T type can now be used on the function
+const addUidTs = (obj) => {
+    let uid = Math.floor(Math.random() * 100);
+    return Object.assign(Object.assign({}, obj), { uid });
+};
+let doc2 = addUidTs({ name: "yoshi", age: 40 });
+console.log(doc2);
+const successResponse = {
+    requestId: "123xxx",
+    statusText: "OK",
+    body: [{ name: "John" }, { name: "Lee", isAdmin: true }],
+};
+const errorResponse = {
+    requestId: "124xxx",
+    statusText: "Not Authorized",
+    body: [],
+};
+console.log(successResponse, errorResponse);

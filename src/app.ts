@@ -48,3 +48,55 @@ form.addEventListener("submit", (e: Event) => {
   console.log(doc);
   listTemplate.render(doc, type.value, "start");
 });
+
+// Generics
+
+// Js
+const addUID = (obj: object) => {
+  let uid = Math.floor(Math.random() * 100);
+  return { ...obj, uid };
+};
+
+let doc1 = addUID({ name: "yoshi", age: 40 });
+
+console.log(doc1.uid);
+
+// Ts
+// <T> means that the function can support any type using T,
+// the T type can now be used on the function
+const addUidTs = <T>(obj: T) => {
+  let uid = Math.floor(Math.random() * 100);
+  return { ...obj, uid };
+};
+
+let doc2 = addUidTs({ name: "yoshi", age: 40 });
+
+console.log(doc2);
+
+// Interface with Generics
+// * I think this is very useful when dealing with http requests
+
+interface Response<T extends object> {
+  statusText: string;
+  requestId: string;
+  body: T;
+}
+
+interface PersonList {
+  name: string;
+  isAdmin?: boolean;
+}
+
+const successResponse: Response<PersonList[]> = {
+  requestId: "123xxx",
+  statusText: "OK",
+  body: [{ name: "John" }, { name: "Lee", isAdmin: true }],
+};
+
+const errorResponse: Response<any> = {
+  requestId: "124xxx",
+  statusText: "Not Authorized",
+  body: [],
+};
+
+console.log(successResponse, errorResponse);
