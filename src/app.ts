@@ -100,3 +100,33 @@ const errorResponse: Response<any> = {
 };
 
 console.log(successResponse, errorResponse);
+
+// Enums
+
+enum ResourceType {
+  BOOK,
+  AUTHOR,
+  FILM,
+  DIRECTOR,
+  PERSON,
+}
+
+interface Resource<T> {
+  uid: number;
+  resourceType: ResourceType;
+  data: T;
+}
+
+const resourceOne: Resource<object> = {
+  uid: 1,
+  resourceType: ResourceType.BOOK,
+  data: { title: "name of the wild" },
+};
+
+const resourceTwo: Resource<object> = {
+  uid: 2,
+  resourceType: ResourceType.PERSON,
+  data: { name: "yoshi" },
+};
+
+console.log(resourceOne, resourceTwo);
